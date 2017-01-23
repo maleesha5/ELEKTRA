@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/devices"
+            android:icon="@drawable/ic_devices_other_black_24px"
+            android:title="Devices" />
+        <item
+            android:id="@+id/add_device"
+            android:icon="@drawable/ic_add_circle_black_24px"
+            android:title="Add Device" />
+        <item
+            android:id="@+id/schedule"
+            android:icon="@drawable/ic_timer_black_24px"
+            android:title="Schedule" />
+        <item
+            android:id="@+id/statistics"
+            android:icon="@drawable/ic_show_chart_black_24px"
+            android:title="Statistics" />
+
+        <item
+            android:id="@+id/notification_settings"
+            android:icon="@drawable/ic_settings_black_24px"
+            android:title="Notification Settings" />
+
+    </group>
+
+    <item android:title="About us">
+        <menu>
+            <item
+                android:id="@+id/share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/contact"
+                android:icon="@drawable/ic_contacts_black_24px"
+                android:title="Contact Us" />
+            <item
+                android:id="@+id/our_team"
+                android:icon="@drawable/ic_people_black_24px"
+                android:title="Our Team" />
+        </menu>
+    </item>
+
+</menu>
