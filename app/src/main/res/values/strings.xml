@@ -9,4 +9,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="addDevice">1.  Select ELEKTRA.\n2.  Select the home network.\n3.  Set password.\n4.  Press Connect.</string>
+    <string name="button">Got It !</string>
+    <string name="connect_msg">"Let's Connect ELEKTRA\nto Internet. "</string>
 </resources>

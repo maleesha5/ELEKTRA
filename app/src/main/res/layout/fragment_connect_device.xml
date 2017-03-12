@@ -7,18 +7,31 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:text="@string/connect_msg"
+        android:text="@string/addDevice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/addDeviceTxt"
         tools:ignore="HardcodedText"
-        android:fontFamily="sans-serif"
+        android:fontFamily="serif-monospace"
         android:textSize="18sp"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="normal|bold"
-        android:layout_marginTop="13dp"
-        android:textAllCaps="true"
-        android:textAlignment="center"
+        android:layout_marginTop="31dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="@string/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="33dp"
+        android:id="@+id/gotItBut"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:background="@color/colorPrimary"
+        android:textStyle="normal|bold"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif"
+        android:onClick="sendMsg" />
 </RelativeLayout>
