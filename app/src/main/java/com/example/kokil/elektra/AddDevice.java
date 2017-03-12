@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
+//This is to check gitHub
 public class AddDevice extends Fragment {
 
 
