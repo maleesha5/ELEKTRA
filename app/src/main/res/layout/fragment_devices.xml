@@ -8,8 +8,7 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     tools:context="com.example.kokil.elektra.Devices"
-    android:id="@+id/fragment_devices"
-    android:background="@color/common_google_signin_btn_text_dark_disabled">
+    android:id="@+id/fragment_devices">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -22,8 +21,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="15dp"
         android:text="Plug"
-        android:textSize="30dp"
-        android:gravity="center_vertical" />
+        android:textSize="30dp" />
 
     <Switch
         android:id="@+id/item_switch"
@@ -33,19 +31,16 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="10dp"
         android:textColorLink="#abd414"
-        android:checked="false"
-        android:gravity="center_vertical" />
+        android:checked="false"/>
 
     <TextView
         android:id="@+id/item_voltage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="90dp"
         android:textAlignment="center"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/devices_name"
-        android:text="Output: 0A"
-        android:gravity="center_vertical" />
+        android:layout_toEndOf="@+id/devices_name" />
 
 
 </RelativeLayout>

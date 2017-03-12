@@ -11,14 +11,13 @@
             android:icon="@drawable/ic_add_circle_black_24px"
             android:title="Add Device" />
         <item
-            android:id="@+id/schedule"
-            android:icon="@drawable/ic_timer_black_24px"
-            android:title="Schedule" />
-        <item
             android:id="@+id/statistics"
             android:icon="@drawable/ic_show_chart_black_24px"
             android:title="Statistics" />
-
+        <item
+            android:id="@+id/schedule"
+            android:icon="@drawable/ic_timer_black_24px"
+            android:title="Schedule" />
         <item
             android:id="@+id/notification_settings"
             android:icon="@drawable/ic_settings_black_24px"

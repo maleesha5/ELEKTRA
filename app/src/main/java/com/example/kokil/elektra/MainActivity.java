@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "This function is not implemented yet ::(", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "This function is not implemented yet :(", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -116,7 +116,11 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.schedule) {
 
-
+            setTitle("Schedule");
+            Schedule schedule = new Schedule();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.content_main, schedule, "schedule");
+            fragmentTransaction.commit();
 
         } else if (id == R.id.notification_settings) {
 
