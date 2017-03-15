@@ -72,7 +72,12 @@ public class AddDevice extends Fragment implements  View.OnClickListener{
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
-
+        Fragment fragment = new Wifi();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.content_main, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
       /*  Fragment fragment = null;
         switch (v.getId()) {
             case R.id.gotItBut:
@@ -81,10 +86,10 @@ public class AddDevice extends Fragment implements  View.OnClickListener{
                 break;
         }*/
     }
-    public void replaceFragment(Fragment someFragment) {
+ /*   public void replaceFragment(Fragment someFragment) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_add_devices, someFragment);
+        transaction.replace(R.id.output, someFragment);
         transaction.addToBackStack(null);
         transaction.commit();
-    }
+    }*/
 }
