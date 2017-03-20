@@ -1,6 +1,11 @@
 package com.example.kokil.elektra;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
+
+import java.util.List;
 
 import static android.content.Context.WIFI_SERVICE;
 
@@ -18,9 +26,10 @@ import static android.content.Context.WIFI_SERVICE;
  */
 //This is to check gitHub
 public class AddDevice extends Fragment {
-
+    
     Switch wifiSwitch;
     WifiManager wifiManager;
+    TextView textView;
 
 
     public AddDevice() {
@@ -35,6 +44,7 @@ public class AddDevice extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_add_device, container, false);
         wifiSwitch = (Switch) rootView.findViewById(R.id.wifiSwitch);
         wifiManager = (WifiManager) getActivity().getSystemService(WIFI_SERVICE);
+        textView = (TextView)rootView.findViewById(R.id.connections);
         wifiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // To on Wifi
@@ -48,8 +58,26 @@ public class AddDevice extends Fragment {
             }
         });
 
+        MyBroadCastReciever myBroadCastReciever = new MyBroadCastReciever();
+        //register the broadcast reciever
+        getActivity().registerReceiver(myBroadCastReciever, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+
+
 
         return rootView;
+    }
+
+    class MyBroadCastReciever extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            StringBuffer stringBuffer = new StringBuffer();
+            List<ScanResult> list = wifiManager.getScanResults();
+            for (ScanResult scanResult:list){
+                stringBuffer.append(scanResult);
+            }
+            textView.setText(stringBuffer);
+        }
     }
 
 }
