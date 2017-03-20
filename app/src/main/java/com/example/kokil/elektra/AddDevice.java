@@ -26,7 +26,7 @@ import static android.content.Context.WIFI_SERVICE;
  */
 //This is to check gitHub
 public class AddDevice extends Fragment {
-    
+
     Switch wifiSwitch;
     WifiManager wifiManager;
     TextView textView;
@@ -45,7 +45,16 @@ public class AddDevice extends Fragment {
         wifiSwitch = (Switch) rootView.findViewById(R.id.wifiSwitch);
         wifiManager = (WifiManager) getActivity().getSystemService(WIFI_SERVICE);
         textView = (TextView)rootView.findViewById(R.id.connections);
+        if (wifiManager.isWifiEnabled()){
+            wifiSwitch.setChecked(true);
+        }else{
+            wifiSwitch.setChecked(false);
+        }
+
         wifiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+
+
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // To on Wifi
                 if (isChecked && !wifiManager.isWifiEnabled()) {
