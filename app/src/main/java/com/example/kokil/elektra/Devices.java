@@ -3,6 +3,8 @@ package com.example.kokil.elektra;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -57,28 +59,35 @@ public class Devices extends Fragment {
         out = (TextView) rootView.findViewById(R.id.item_voltage);
         toggle1 = (Switch) rootView.findViewById(R.id.item_switch);
         toggle1.setChecked(false);
-        new ApiUbidots2().execute();
+
+        if(isNetworkAvailable()) {
+            new ApiUbidots2().execute();
+        }else{
+            Toast.makeText(getActivity(), "Device is not connected to the internet.",
+                    Toast.LENGTH_LONG).show();
+        }
 
         toggle1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
-                if (isChecked) {
-                    isOn = true;
-                    state = 1;
-                } else {
-                    state = 0;
-                    isOn = false;
+                if(isNetworkAvailable()) {
 
+                    if (isChecked) {
+                        isOn = true;
+                        state = 1;
+                    } else {
+                        state = 0;
+                        isOn = false;
+                    }
+
+                }else{
+                    Toast.makeText(getActivity(), "Device is not connected to the internet.",
+                            Toast.LENGTH_LONG).show();
                 }
-                new ApiUbidots().execute();
             }
         });
-
-
-
-
         return rootView;
     }
 
@@ -131,8 +140,6 @@ public class Devices extends Fragment {
                 public void run() {
 
                     new ApiUbidots3().execute();
-
-
                 }
             };
             timer.schedule(doAsynchronousTask, 0, 2000); //execute in every 2000 ms
@@ -165,6 +172,13 @@ public class Devices extends Fragment {
 
         }
 
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }
