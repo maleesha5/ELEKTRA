@@ -43,7 +43,7 @@ public class AddDevice extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_add_device, container, false);
         wifiSwitch = (Switch) rootView.findViewById(R.id.wifiSwitch);
-        wifiManager = (WifiManager) getActivity().getSystemService(WIFI_SERVICE);
+        wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(WIFI_SERVICE);
         textView = (TextView)rootView.findViewById(R.id.connections);
         if (wifiManager.isWifiEnabled()){
             wifiSwitch.setChecked(true);
