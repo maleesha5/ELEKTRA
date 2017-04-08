@@ -66,7 +66,7 @@ class WeatherStatus extends AsyncTask<Void, Void, Void> {
                     String id = c.getString("id");
                     int intId = Integer.parseInt(id);
 
-//                    if (200 <= intId && intId <= 250) {//if there is some Thondering give a alert
+//                    if (200 <= intId && intId <= 250) {//if there is some Lightning give a alert
 //
 //                        PendingIntent dummyIntent = PendingIntent.getActivity(getApplicationContext(),
 //                                0,
