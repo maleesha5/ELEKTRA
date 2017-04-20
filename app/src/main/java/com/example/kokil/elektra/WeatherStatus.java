@@ -14,20 +14,17 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.google.android.gms.internal.zzs.TAG;
 
 /**
- * Created by maleesha5 on 4/7/2017.
+ * Created by Hemal on 4/7/2017.
  */
-
 
 class WeatherStatus extends AsyncTask<Void, Void, Void> {
     @Override
@@ -35,7 +32,6 @@ class WeatherStatus extends AsyncTask<Void, Void, Void> {
         super.onPreExecute();
         //  Toast.makeText(MainActivity.this,"Json Data is
         //          downloading",Toast.LENGTH_LONG).show();
-        // 1234566789987654321
 
     }
 
@@ -43,7 +39,7 @@ class WeatherStatus extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... arg0) {
         HttpHandler sh = new HttpHandler();
         // Making a request to url and getting response
-        String url = "http://api.openweathermap.org/data/2.5/weather?q=Peliyagoda&appid=6b305548a0cfd94c7fa2bcbc99037db8";
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=Kurunegala&appid=6b305548a0cfd94c7fa2bcbc99037db8";
         String jsonStr = sh.makeServiceCall(url);
 
         Log.e(TAG, "Response from url: " + jsonStr);
