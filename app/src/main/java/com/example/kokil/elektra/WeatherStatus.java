@@ -35,6 +35,7 @@ class WeatherStatus extends AsyncTask<Void, Void, Void> {
         super.onPreExecute();
         //  Toast.makeText(MainActivity.this,"Json Data is
         //          downloading",Toast.LENGTH_LONG).show();
+        // 1234566789987654321
 
     }
 
