@@ -36,6 +36,7 @@ class WeatherStatus extends AsyncTask<Void, Void, Void> {
         //  Toast.makeText(MainActivity.this,"Json Data is
         //          downloading",Toast.LENGTH_LONG).show();
 
+        //  Gembaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     }
 
     @Override
