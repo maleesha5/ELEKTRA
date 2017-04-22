@@ -1,107 +1,84 @@
 package com.example.kokil.elektra;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Intent;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
-import android.widget.ToggleButton;
+
+import com.ubidots.ApiClient;
+import com.ubidots.Variable;
 
 import java.util.Calendar;
 
-import static android.R.id.toggle;
-import static android.content.Context.ALARM_SERVICE;
-//import static com.example.kokil.elektra.R.id.time;
-
-/**
- * Created by kokil on 22/01/2017.
+/* created by sankalpa
+   on 2017/04/12
  */
 
-public class Schedule extends Fragment {
-    TimePicker alarmTimePicker;
-    PendingIntent pendingIntent;
-    AlarmManager alarmManager;
-    long time;
-
-    Button b_pick,cancel;
+public class Schedule extends Fragment implements DatePickerDialog.OnDateSetListener,
+        TimePickerDialog.OnTimeSetListener {
+    Button b_pick;
     TextView result;
-    TextView result2;
+    // TextView result2;
     TextView result3;
     TextView result4;
     CountDownTimer countDownTimer;
-
+    View rootView;
     int day,month,year,hour,minute,second;                      //current date variables
     int dayFinal,monthFinal,yearFinal,hourFinal,minuteFinal;    //user selected date variables
     int dayPre,monthPre,yearPre,hourPre,minutePre,secondPre;     // current date in miliseconds variables
     int hourPas,minutePas,monthPas,dayPas;                      //user selected date in miliseconds
     int totalPre,totalPas,difference;                           //date difference and total variables
 
+    private final String API_KEY = "cada20a3fbf7e42890cb2fa273db6f6bad7eb0b3";
+    private final String VARIABLE_ID = "585e7f1176254273e64e6cd8";
 
+    public Schedule() {
 
-    private View.OnClickListener btnOnClickListener= new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {  // checking button is clicked
-            switch(v.getId()){
-                case R.id.b_pick:
-                    start();             //start button
-                    break;
-                case R.id.cancel:
-                    cancel();              //cancel button
-                    break;
-
-            }
-
-        }
-    };
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-
-        b_pick=(Button) findViewById(R.id.b_pick);
-        b_pick.setOnClickListener(btnOnClickListener);
-        cancel=(Button) findViewById(R.id.cancel);
-        cancel.setOnClickListener(btnOnClickListener);
-        result=(TextView) findViewById(R.id.result);
-        result2=(TextView) findViewById(R.id.result2);
-        result3=(TextView) findViewById(R.id.result3);
-        result4=(TextView) findViewById(R.id.result4);
-
-      /*  b_pick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                start();
-
-
-
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                cancel();
-
-
-
-            }
-        });*/
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.fragment_schedule, container, false);
 
+        View.OnClickListener btnOnClickListener= new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {  // checking button is clicked
+                switch(v.getId()){
+                    case R.id.b_pick:
+                        start();             //start button
+                        break;
+                    // case R.id.cancel:
+                    //cancel();              //cancel button
+                    // break;
+
+                }
+
+            }
+        };
+
+        b_pick=(Button)rootView.findViewById(R.id.b_pick);
+        b_pick.setOnClickListener(btnOnClickListener);
+        //cancel=(Button) findViewById(R.id.cancel);
+        //cancel.setOnClickListener(btnOnClickListener);
+        result=(TextView) rootView.findViewById(R.id.result);
+        // result2=(TextView) findViewById(R.id.result2);
+        result3=(TextView) rootView.findViewById(R.id.result3);
+        result4=(TextView) rootView.findViewById(R.id.result4);
+
+        return rootView;
+    }
     private void start(){   // setting date in date picker to current date
 
         Calendar c= Calendar.getInstance();
@@ -115,13 +92,14 @@ public class Schedule extends Fragment {
 
 
 
-        result2.setText(year+" "+month+" "+day+ " "+hour+ " "+minute+ " "
-                +second);
+        // result2.setText(year+" "+month+" "+day+ " "+hour+ " "+minute+ " "
+        //         +second);
 
-        DatePickerDialog datePickerDialog=new DatePickerDialog(MainActivity.this, MainActivity.this, year, month, day);
+        DatePickerDialog datePickerDialog=new DatePickerDialog(getActivity(), Schedule.this, year, month, day);
         datePickerDialog.show();
 
     }
+
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {  //user selected month day
 
@@ -131,8 +109,8 @@ public class Schedule extends Fragment {
 
         //Calendar c=Calendar.getInstance();
 
-        TimePickerDialog timePickerDialog=new TimePickerDialog(MainActivity.this, MainActivity.this,hour, minute,
-                DateFormat.is24HourFormat(this));
+        TimePickerDialog timePickerDialog=new TimePickerDialog(getActivity(), Schedule.this,hour, minute,
+                DateFormat.is24HourFormat(getContext()));
         timePickerDialog.show();
 
 
@@ -150,7 +128,7 @@ public class Schedule extends Fragment {
 
 
 
-        result.setText("Year :"+yearFinal+"\nMonth :"+monthFinal+"\nDay :"+day+"\nHour :"+hourFinal+"\nMinute :"+minuteFinal);
+        result.setText("Month :"+monthFinal+"\nDay :"+dayFinal+"\nHour :"+hourFinal+"\nMinute :"+minuteFinal);
         //result2.setText(yearFinal);
 
         current();
@@ -177,8 +155,7 @@ public class Schedule extends Fragment {
 
 
 
-        result4.setText(year+" "+month+" "+day+ " "+hour+ " "+minute+ " "
-                +second);
+        result4.setText("Month :"+month+"\nDay :"+day+"\nHour :"+hour+"\nMinute :"+minute);
 
         monthPre=month*month_def;       //current month in miliseconds
         dayPre=day*day_def;             //current day in miliseconds
@@ -213,13 +190,16 @@ public class Schedule extends Fragment {
             @Override
             public void onTick(long millisUntilFinished) {
 
-                result3.setText("count"+millisUntilFinished/1000);
+                result3.setText((millisUntilFinished/1000)+" seconds");
 
             }
 
             @Override
             public void onFinish() {
-                result3.setText("finished"); // on finish set text to finished
+                result3.setText("finished");
+
+                new ApiUbidotsSchedule().execute();
+                // on finish set text to finished
                 //  Vibrator v=(Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
                 // v.vibrate(500);
                 // countDownTimer.cancel();
@@ -231,7 +211,7 @@ public class Schedule extends Fragment {
 
     // cancel countdown
     public void cancel(){
-        result2.setText("canceled");
+        //result2.setText("canceled");
         countDownTimer.cancel();
 /*if(countDownTimer!=null) {
     countDownTimer.cancel();
@@ -242,6 +222,19 @@ public class Schedule extends Fragment {
 
 
 
+
+    }
+    public class ApiUbidotsSchedule extends AsyncTask<Integer, Void, Void> {
+
+
+        @Override
+        protected Void doInBackground(Integer... params) {
+            ApiClient apiClient = new ApiClient(API_KEY);
+            Variable batteryLevel = apiClient.getVariable(VARIABLE_ID);
+
+            batteryLevel.saveValue(0);
+            return null;
+        }
 
     }
 }
