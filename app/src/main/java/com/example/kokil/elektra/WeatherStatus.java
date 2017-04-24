@@ -1,11 +1,18 @@
 package com.example.kokil.elektra;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.service.notification.NotificationListenerService;
 import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +21,15 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
 import static com.google.android.gms.internal.zzs.TAG;
 
 /**
@@ -54,10 +64,33 @@ class WeatherStatus extends AsyncTask<Void, Void, Void> {
                 for (int i = 0; i < weather.length(); i++) {
                     JSONObject c = weather.getJSONObject(i);
                     String id = c.getString("id");
+                    int intId = Integer.parseInt(id);
+
+//                    if (200 <= intId && intId <= 250) {//if there is some Thondering give a alert
+//
+//                        PendingIntent dummyIntent = PendingIntent.getActivity(getApplicationContext(),
+//                                0,
+//                                new Intent(),
+//                                PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//                        Notification noti = new Notification.Builder(MainActivity.this)
+//
+//                                .setTicker("Tickertittle")
+//                                .setContentTitle("ELEKTRA WEATHER ALERT")
+//                                .setContentText("TURN OFF the multi plug for lighting safety")
+//                                .setContentIntent(dummyIntent);
+//
+//                           noti.flags = Notification.FLAG_AUTO_CANCEL;
+//                           NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+//                           nm.notify(0,noti);
+//
+//                    }
+
                     String main = c.getString("main");
                     String descrip = c.getString("description");
                     String icon = c.getString("icon");
                     // String gender = c.getString("gender");
+
 
                     // Phone node is JSON Object
                      /*   JSONObject phone = c.getJSONObject("phone");
@@ -114,5 +147,7 @@ class WeatherStatus extends AsyncTask<Void, Void, Void> {
             lv.setAdapter(adapter);
         }*/
     }
+
+
 }
 
