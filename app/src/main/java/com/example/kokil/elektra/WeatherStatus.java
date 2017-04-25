@@ -1,11 +1,18 @@
 package com.example.kokil.elektra;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.service.notification.NotificationListenerService;
 import android.util.Log;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,16 +29,18 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.content.Context.NOTIFICATION_SERVICE;
 import static com.google.android.gms.internal.zzs.TAG;
 
 /**
- * Created by maleesha5 on 4/7/2017.
+ * Created by Dell on 4/7/2017.
  */
 
-
 class WeatherStatus extends AsyncTask<Void, Void, Void> {
+
     @Override
     protected void onPreExecute() {
+
         super.onPreExecute();
         //  Toast.makeText(MainActivity.this,"Json Data is
         //          downloading",Toast.LENGTH_LONG).show();
@@ -40,27 +49,55 @@ class WeatherStatus extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected Void doInBackground(Void... arg0) {
+
         HttpHandler sh = new HttpHandler();
         // Making a request to url and getting response
-        String url = "http://api.openweathermap.org/data/2.5/weather?q=Peliyagoda&appid=6b305548a0cfd94c7fa2bcbc99037db8";
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=Kurunegala&appid=6b305548a0cfd94c7fa2bcbc99037db8";
         String jsonStr = sh.makeServiceCall(url);
 
         Log.e(TAG, "Response from url: " + jsonStr);
         if (jsonStr != null) {
+
             try {
+
                 JSONObject jsonObj = new JSONObject(jsonStr);
 
                 // Getting JSON Array node
+
                 JSONArray weather = jsonObj.getJSONArray("weather");
 
                 // looping through All Contacts
+
                 for (int i = 0; i < weather.length(); i++) {
                     JSONObject c = weather.getJSONObject(i);
                     String id = c.getString("id");
+                    int intId = Integer.parseInt(id);
+
+//                    if (200 <= intId && intId <= 250) {//if there is some Lightning give a alert
+//
+//                        PendingIntent dummyIntent = PendingIntent.getActivity(getApplicationContext(),
+//                                0,
+//                                new Intent(),
+//                                PendingIntent.FLAG_UPDATE_CURRENT);
+//
+//                        Notification noti = new Notification.Builder(MainActivity.this)
+//
+//                                .setTicker("Tickertittle")
+//                                .setContentTitle("ELEKTRA WEATHER ALERT")
+//                                .setContentText("TURN OFF the multi plug for lighting safety")
+//                                .setContentIntent(dummyIntent);
+//
+//                           noti.flags = Notification.FLAG_AUTO_CANCEL;
+//                           NotificationManager nm = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+//                           nm.notify(0,noti);
+//
+//                    }
+
                     String main = c.getString("main");
                     String descrip = c.getString("description");
                     String icon = c.getString("icon");
                     // String gender = c.getString("gender");
+
 
                     // Phone node is JSON Object
                      /*   JSONObject phone = c.getJSONObject("phone");
@@ -94,6 +131,7 @@ class WeatherStatus extends AsyncTask<Void, Void, Void> {
             }
 
         } else {
+            
             Log.e(TAG, "Couldn't get json from server.");
             //  runOnUiThread(new Runnable() {
                /*     @Override
@@ -110,6 +148,7 @@ class WeatherStatus extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void result) {
+
          /*   super.onPostExecute(result);
             ListAdapter adapter = new SimpleAdapter(MainActivity.this, contactList,
                     R.layout.list_item, new String[]{ "email","mobile"},
@@ -117,5 +156,7 @@ class WeatherStatus extends AsyncTask<Void, Void, Void> {
             lv.setAdapter(adapter);
         }*/
     }
+
+
 }
 
