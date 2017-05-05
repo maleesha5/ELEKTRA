@@ -86,6 +86,7 @@ public class AddDevice extends Fragment {
                 stringBuffer.append(scanResult);
             }
             textView.setText(stringBuffer);
+            // testing one two one two
         }
     }
 
