@@ -3,42 +3,37 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/devices"
-            android:icon="@drawable/ic_devices_other_black_24px"
+            android:id="@+id/nav_devices"
+            android:icon="@drawable/ic_devices_other_black_24dp"
             android:title="Devices" />
         <item
-            android:id="@+id/add_device"
-            android:icon="@drawable/ic_add_circle_black_24px"
+            android:id="@+id/nav_addDevice"
+            android:icon="@drawable/adddevice"
             android:title="Add Device" />
         <item
-            android:id="@+id/statistics"
-            android:icon="@drawable/ic_show_chart_black_24px"
-            android:title="Statistics" />
-        <item
-            android:id="@+id/schedule"
-            android:icon="@drawable/ic_timer_black_24px"
+            android:id="@+id/nav_schedule"
+            android:icon="@drawable/schedule"
             android:title="Schedule" />
         <item
-            android:id="@+id/notification_settings"
-            android:icon="@drawable/ic_settings_black_24px"
-            android:title="Notification Settings" />
-
+            android:id="@+id/nav_stats"
+            android:icon="@drawable/stat"
+            android:title="Statistics" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Settings" />
     </group>
 
-    <item android:title="About us">
+    <item android:title="About Us">
         <menu>
             <item
-                android:id="@+id/share"
+                android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/contact"
-                android:icon="@drawable/ic_contacts_black_24px"
-                android:title="Contact Us" />
-            <item
-                android:id="@+id/our_team"
-                android:icon="@drawable/ic_people_black_24px"
                 android:title="Our Team" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Our Product" />
         </menu>
     </item>
 
