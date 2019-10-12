@@ -15,4 +15,7 @@ public class ExampleUnitTest {
     public void multiplication_isCorrect() throws Exception {
         assertEquals(8, 4 * 2);
     }
+    public void sub_isCorrect() throws Exception {
+        assertEquals(2, 4 - 2);
+    }
 }
